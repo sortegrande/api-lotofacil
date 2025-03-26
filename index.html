@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>API Lotofácil</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            padding: 20px;
+        }
+    </style>
     <script>
         async function capturarDados() {
             const url = "https://servicebus2.caixa.gov.br/portaldeloterias/api/lotofacil"; // API oficial
@@ -14,7 +24,7 @@
 
                 let dados = await response.json();
 
-                // Exibe os dados na tela como JSON
+                // Exibe os dados na tela como JSON formatado
                 document.body.innerText = JSON.stringify(dados, null, 4);
 
                 // Enviar os dados para seu servidor PHP
