@@ -3,11 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fornecendo Dados</title>
-</head>
-<body>
-    <h1>Coletando Dados ...</h1>
-
+    <title>API Lotofácil</title>
     <script>
         async function capturarDados() {
             const url = "https://servicebus2.caixa.gov.br/portaldeloterias/api/lotofacil"; // API oficial
@@ -17,6 +13,9 @@
                 if (!response.ok) throw new Error("Erro ao buscar dados");
 
                 let dados = await response.json();
+
+                // Exibe os dados na tela como JSON
+                document.body.innerText = JSON.stringify(dados, null, 4);
 
                 // Enviar os dados para seu servidor PHP
                 fetch("https://lotofacil.dicasbrasil.com.br/git.php", {
@@ -30,10 +29,13 @@
 
             } catch (error) {
                 console.error("Erro ao obter dados:", error);
+                document.body.innerText = JSON.stringify({ erro: error.message }, null, 4);
             }
         }
 
         capturarDados();
     </script>
+</head>
+<body>
 </body>
 </html>
