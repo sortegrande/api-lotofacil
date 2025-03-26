@@ -22,7 +22,7 @@
             const concurso = params.get('concurso'); // Número do concurso
 
             // Verifica se o número do concurso foi passado
-            if (!numeroConcurso) {
+            if (!concurso) {
                 document.body.innerText = JSON.stringify({ erro: "Número do concurso não informado!" }, null, 4);
                 return;
             }
