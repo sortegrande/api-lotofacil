@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Captura de Dados da Loteria</title>
+</head>
+<body>
+    <h1>Coletando Dados da API da Caixa...</h1>
+
+    <script>
+        async function capturarDados() {
+            const url = "https://servicebus2.caixa.gov.br/portaldeloterias/api/lotofacil"; // API oficial
+
+            try {
+                let response = await fetch(url);
+                if (!response.ok) throw new Error("Erro ao buscar dados");
+
+                let dados = await response.json();
+
+                // Enviar os dados para seu servidor PHP
+                fetch("https://seudominio.com/processa_dados.php", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(dados)
+                })
+                .then(res => res.json())
+                .then(data => console.log("Dados enviados:", data))
+                .catch(err => console.error("Erro no envio:", err));
+
+            } catch (error) {
+                console.error("Erro ao obter dados:", error);
+            }
+        }
+
+        capturarDados();
+    </script>
+</body>
+</html>
