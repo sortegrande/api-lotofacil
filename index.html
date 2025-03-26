@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API Lotofácil</title>
+    <title>API Loteria</title>
     <style>
         body {
             background-color: black;
@@ -15,8 +15,19 @@
         }
     </style>
     <script>
-        async function capturarDados() {
-            const url = "https://servicebus2.caixa.gov.br/portaldeloterias/api/lotofacil"; // API oficial
+        async function captura_json() {
+            // Pega os parâmetros 'loteria' e 'numero_concurso' da query string, se existirem
+            const params = new URLSearchParams(window.location.search);
+            const loteria = params.get('loteria') || 'lotofacil'; // Default é 'lotofacil'
+            const concurso = params.get('concurso'); // Número do concurso
+
+            // Verifica se o número do concurso foi passado
+            if (!numeroConcurso) {
+                document.body.innerText = JSON.stringify({ erro: "Número do concurso não informado!" }, null, 4);
+                return;
+            }
+
+            const url = `https://servicebus2.caixa.gov.br/portaldeloterias/api/${loteria}/${concurso}`; // API com loteria e concurso parametrizados
 
             try {
                 let response = await fetch(url);
@@ -43,7 +54,7 @@
             }
         }
 
-        capturarDados();
+        captura_json();
     </script>
 </head>
 <body>
