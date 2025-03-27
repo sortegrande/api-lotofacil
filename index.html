@@ -28,7 +28,7 @@
             }
 
             const url = `https://servicebus2.caixa.gov.br/portaldeloterias/api/${loteria}/${concurso}`; // API com loteria e concurso parametrizados
-
+            const endpoint = `https://lotofacil.dicasbrasil.com.br/git.php?loteria=${loteria}&concurso=${concurso}`; 
             try {
                 let response = await fetch(url);
                 if (!response.ok) throw new Error("Erro ao buscar dados");
@@ -39,7 +39,7 @@
                 document.body.innerText = JSON.stringify(dados, null, 4);
 
                 // Enviar os dados para seu servidor PHP
-                fetch("https://lotofacil.dicasbrasil.com.br/git.php", {
+                fetch(endpoint, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(dados)
